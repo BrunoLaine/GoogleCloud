@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,8 +31,32 @@
 		<!-- Main -->
 		<div id="main">
 		
-			<h1>Bienvenue sur notre application Cloud</h1>
+
+			<h1>Liste des visiteurs :</h1>
+
+			<table>
+				<tr>
+					<th>Prénom</th>
+					<th>Nom</th>
+				</tr>
+
+				<%
+					ArrayList<String> prenoms = (ArrayList<String>) request
+							.getAttribute("prenoms");
+					ArrayList<String> noms = (ArrayList<String>) request
+							.getAttribute("noms");
+
+					for (int i = 0; i < prenoms.size(); i++) {
+						out.println("<tr><td>" + prenoms.get(i) + "</td>");
+						out.println("<td>" + noms.get(i) + "</td></tr>");
+					}
+					if (prenoms.size() == 0){
+						out.println("Pas encore de visiteurs enregistrés. L'enregistrement peut prendre plusieurs secondes");
+					}
+				%>
+			</table>
 		
+			<h1>Ajouter un visiteur :</h1>
 			<form method="post" action="datastore">
 				Prenom : <input type="text" name="prenom"><br> 
 				nom : <input type="text" name="nom"> <br>
