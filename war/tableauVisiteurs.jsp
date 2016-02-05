@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="assets/css/main.css" />
 <title>Insert title here</title>
 </head>
 <body>
@@ -17,11 +18,12 @@
 		</tr>
 
 		<%
-			ArrayList<String> prenoms = (ArrayList) request.getAttribute("prenoms");
+			ArrayList<String> prenoms = (ArrayList) request
+					.getAttribute("prenoms");
 			ArrayList<String> noms = (ArrayList) request.getAttribute("noms");
-			for(int i = 0; i < prenoms.size(); i++){
+			for (int i = 0; i < prenoms.size(); i++) {
 				out.println("<tr><td>" + prenoms.get(i) + "</td>");
-			    out.println("<td>" + noms.get(i) + "</td></tr>");
+				out.println("<td>" + noms.get(i) + "</td></tr>");
 			}
 		%>
 	</table>

@@ -4,14 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="assets/css/main.css" />
 <title>Insert title here</title>
 </head>
 <body>
 
 	<form method="post" action="datastore">
 		Prenom : <br> <input type="text" name="prenom"><br>
-		nom : <br> <input type="text" name="nom"> 
-		<input type="submit" value="Submit">
+		nom : <br> <input type="text" name="nom"> <input
+			type="submit" value="Submit">
 	</form>
 
 </body>
