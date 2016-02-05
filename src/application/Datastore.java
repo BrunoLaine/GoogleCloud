@@ -22,14 +22,15 @@ public class Datastore extends HttpServlet {
 		
 		String nom = req.getParameter("nom");
 		String prenom = req.getParameter("prenom");
+		
 		if (nom == null || prenom == null){
 			//si pas d'infos sur le nouveau visiteur, afficher le formulaire
 			getServletContext().getRequestDispatcher("/formulaireNomPrenom.jsp").forward(req, resp);
 		}
 		else {
-			//ajoute le visiteur
 			DatastoreService dataStore = DatastoreServiceFactory.getDatastoreService();
-			Query query = new Query("Personne");
+
+			//ajoute le visiteur
 			Transaction tx = dataStore.beginTransaction();
 			Entity person = new Entity("Personne");
 			person.setProperty("nom", nom);
@@ -38,17 +39,19 @@ public class Datastore extends HttpServlet {
 			tx.commit();
 			
 			//récupère la liste des visiteurs
-			List<String> noms = new ArrayList<String>();
-			List<String> prenoms = new ArrayList<String>();
+			ArrayList<String> prenoms = new ArrayList<String>();
+			ArrayList<String> noms = new ArrayList<String>();
+			Query query = new Query("Personne");
 			PreparedQuery pq = dataStore.prepare(query);
 			for(Entity e: pq.asIterable()){
-				noms.add((String) e.getProperty("nom"));
 				prenoms.add((String) e.getProperty("prenom"));
+				noms.add((String) e.getProperty("nom"));
 			}
 			
 			//affiche la liste
 			req.setAttribute("prenoms", prenoms);
 			req.setAttribute("noms", noms);
+			System.out.println("prenoms : " + prenoms + ", noms : " + noms);
 			getServletContext().getRequestDispatcher("/tableauVisiteurs.jsp").forward(req, resp);
 		}
 	}
